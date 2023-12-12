@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+    <center>
+        <h1>Payment Page</h1>
+        <form action="/ccavRequestHandler" method="POST">
+            <label for="order_id">Order ID:</label>
+            <input type="text" id="order_id" name="order_id" required><br><br>
+            <label for="currency">Currency:</label>
+            <input type="text" id="currency" name="currency" required><br><br>
+            <label for="amount">Amount:</label>
+            <input type="text" id="amount" name="amount" required><br><br>
+            <!-- Add more input fields as needed -->
+            <input type="submit" value="Make Payment">
+        </form>
+    </center>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('form').submit(function(event){
+                event.preventDefault();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: $(this).serialize(),
+                    success: function(response){
+                        $('body').html(response);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
